@@ -7,14 +7,10 @@ import com.donald.gateway.pojo.Order;
 import com.donald.gateway.sotrage.OrderQueue;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
-import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -39,7 +35,7 @@ public class MessageSender {
     private final AtomicInteger sendCountPerSec = new AtomicInteger(0);
 
     @PostConstruct
-    public void init() throws InterruptedException {
+    public void init() {
         // setup sender thread
         senderThread = new SenderThread();
         senderThread.start();
@@ -105,7 +101,7 @@ public class MessageSender {
             bytes[pos++] = (byte) order.getMsgType();
             pos = LittleEndianByteHelper.writeLongToByteArray(bytes, order.getClOrdID(), pos);
             pos = LittleEndianByteHelper.writeShortToByteArray(bytes, order.getSymbol(), pos);
-            pos = LittleEndianByteHelper.writeLongToByteArray(bytes, order.getPrice(), pos);
+            LittleEndianByteHelper.writeLongToByteArray(bytes, order.getPrice(), pos);
             return bytes;
         }
     }

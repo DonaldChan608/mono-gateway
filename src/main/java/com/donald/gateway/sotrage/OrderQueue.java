@@ -2,14 +2,12 @@ package com.donald.gateway.sotrage;
 
 import com.donald.gateway.pojo.Order;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.LinkedBlockingQueue;
 
 @Slf4j
-@Component
 public class OrderQueue {
 
     private final LinkedBlockingQueue<Order> orderQueue  = new LinkedBlockingQueue<>();

@@ -5,7 +5,6 @@ import com.donald.gateway.pojo.Order;
 import com.donald.gateway.sotrage.OrderQueue;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
